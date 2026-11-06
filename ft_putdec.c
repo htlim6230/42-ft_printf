@@ -75,19 +75,19 @@ int ft_putdec(double dec)
     count++;
 
     // 3. Isolate the fractional part
-    fractional_part = dec - (int)dec;
+    fractional_part = dec - (int)dec; //eg fp = 123.456 - 123 -> fp = 0.456
     i = 0;
     while (i < 6)
     {
         fractional_part *= 10;
-        digit = (int)fractional_part;
+        digit = (int)fractional_part; //cast to int so we can drop the subsequent fraction part.
         
         char c = digit + '0';
         write(1, &c, 1);
         count++;
         
         // Remove the digit we just printed so we can grab the next one
-        fractional_part -= digit; 
+        fractional_part -= digit; //eg 
         i++;
     }
     return (count);

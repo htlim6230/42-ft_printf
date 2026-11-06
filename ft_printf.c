@@ -6,32 +6,16 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 14:47:20 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/05 21:43:25 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/06 20:04:16 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
-//#include "ft_printf.h"
+#include "ft_printf.h"
 
 #include <stdio.h>
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-	if (str[i] == '\0')
-	{
-		return (0);
-	}
-}
 
 int	ft_putchar(char c)
 {
@@ -52,105 +36,52 @@ int	ft_putstr(char *s)
 	return (i);
 }
 
-int	ft_putnbr(int n)
+int	ft_print_inst(const char *str, ...)
 {
-	long	nb;
-	int		len;
-
-	nb = n;
-	len = 0;
-
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb = -nb;
-		len++;
-	}
-	if (nb >= 10)
-	{
-		len += ft_putnbr(nb / 10);
-		len += ft_putchar(nb % 10 + '0');
-	}
-	else
-	{
-		len += ft_putchar(nb + '0');
-	}
-	return (len);
-}
-
-int	ft_putdec(double dec)
-{
-	int		integer_part;
-	double	fractional_part;
-	int		dec_holder;
+	va_list	args;
 	int		i;
-	char	c;
 
-	integer_part = (int)dec;
-	ft_putnbr(dec);
-	fractional_part = dec - integer_part;
-	i = 0;
-	while(i < 6)
+	va_start(args, str);
+	if (str[i] == 'c')
+		return (ft_putchar(va_arg(args, char)));
+	else if (str[i] == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	else if (str[i] == 'i')
+		return (ft_putnbr(va_arg(args, int)));
+	else if ((str[i] == 'd') || (str[i] == 'u'))
+		return (ft_putdec(va_arg(args, double)));
+	else if ((str[i] == 'x') || (str[i] == 'X'))
+		return (ft_puthex(&str[i], va_arg(args, unsigned int)));
+	else if (str[i] == 'p')
+		return (ft_point_hex(va_args(args, void *)));
+	else if (str[i] == '%')
 	{
-		dec *= 10;
-		dec_holder = (int)dec;
-		c = dec_holder + '0';
-		write(1, &c, 1);
-		i--;
+		write (1, '%', 1);
+		return (1);
 	}
-	return(ft_strlen(&c) + 6);
+	va_end(args);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		tracker;
 	int		i;
-	int		n;
-	char	c;
-	char	*s;
-	int	nb;
-	double	dec;
 
 	i = 0;
-	n = 0;
-	tracker = 0;
 	va_start(args, str);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%' && str[i + 1] == 'c')
+		if (str[i] == '%')
 		{
+			ft_print_inst(args);
 			i++;
-			c = (char)va_arg(args, int);
-			write(1, &c, 1);
-			tracker++;
-		}
-		else if (str[i] == '%' && str[i + 1] == 's')
-		{
-			i++;
-			s = va_arg(args, char*);
-			tracker += ft_putstr(s);
-		}
-		else if (str[i] == '%' && (str[i + 1] == 'i'))
-		{
-			i++;
-			nb = va_arg(args, int);
-			tracker += ft_putnbr(nb);
-		}
-		else if (str[i] == '%' && (str[i + 1] == 'd'))
-		{
-			i++;
-			dec = va_arg(args, double);
-			tracker += ft_putdec(nb);
 		}
 		else
-		{
 			tracker += ft_putchar(str[i]);
-		}
 		i++;
 	}
 	va_end(args);
-	return (tracker);
+	return (i);
 }
 
 int	main()

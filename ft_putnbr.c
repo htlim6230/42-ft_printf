@@ -6,12 +6,18 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 21:12:39 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/05 21:25:37 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/06 17:33:49 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include "ft_printf.h"
 
-int	ft_putnbr(int nb)
+#include <stdio.h>
+
+int	ft_putnbr(int n)
 {
 	long	nb;
 	int		len;

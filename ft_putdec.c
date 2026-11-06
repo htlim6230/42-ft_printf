@@ -6,10 +6,16 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 21:17:51 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/05 21:45:19 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/06 17:33:44 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include "ft_printf.h"
+
+#include <stdio.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -27,68 +33,48 @@ size_t	ft_strlen(const char *str)
 	}
 }
 
-int	ft_putdec(double dec)
+int	ft_put_fraction(double fractional_part)
 {
-	int		integer_part;
-	double	fractional_part;
-	int		dec_holder;
+	int		digit;
 	int		i;
 	char	c;
 
-	integer_part = (int)dec;
-	ft_putnbr(dec);
-	fractional_part = dec - integer_part;
 	i = 0;
-	while(i < 6)
+	while (i < 6)
 	{
-		dec *= 10;
-		dec_holder = int(dec);
-		c = dec_holder + '0';
+		fractional_part *= 10;
+		digit = (int)fractional_part;
+		c = digit + '0';
 		write(1, &c, 1);
-		i--;
+		fractional_part -= digit;
+		i++;
 	}
-	return(ft_strlen(&c) + 6);
+	return (ft_strlen(&c) + 6);
 }
 
-int ft_putdec(double dec)
+int	ft_putdec(double dec)
 {
-    int     count;
-    int     i;
-    int     digit;
-    double  fractional_part;
+	int		count;
+	int		i;
+	int		digit;
+	double	fractional_part;
 
-    count = 0;
-    // 1. Handle negative numbers safely
-    if (dec < 0)
-    {
-        write(1, "-", 1);
-        dec = -dec;
-        count++;
-    }
-    // 2. Print the integer part
-    // (Assuming ft_putnbr prints the int part and returns nothing or handles its own count)
-    ft_putnbr((int)dec); 
-    
-    // Note: If you have a working ft_putnbr_count, add its return value to count.
-    // For this example, let's manually track the 7 characters printed below ('.' + 6 digits)
-    write(1, ".", 1);
-    count++;
+	count = 0;
+	i = 0;
 
-    // 3. Isolate the fractional part
-    fractional_part = dec - (int)dec; //eg fp = 123.456 - 123 -> fp = 0.456
-    i = 0;
-    while (i < 6)
-    {
-        fractional_part *= 10;
-        digit = (int)fractional_part; //cast to int so we can drop the subsequent fraction part.
-        
-        char c = digit + '0';
-        write(1, &c, 1);
-        count++;
-        
-        // Remove the digit we just printed so we can grab the next one
-        fractional_part -= digit; //eg 
-        i++;
-    }
-    return (count);
+	if (dec < 0)
+	{
+		write(1, "-", 1);
+		dec = -dec;
+		count++;
+	}
+	ft_putnbr((int)dec);
+	write(1, ".", 1);
+	count++;
+	fractional_part = dec - (int)dec;
+	while (i < 6)
+	{
+		digit = ft_put_fraction(fractional_part);
+	}
+	return (count + digit);
 }

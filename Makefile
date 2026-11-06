@@ -1,11 +1,11 @@
-NAME = libprintf.a
+NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar rcs
 RM = rm -f
 
-SRCS = $(addsuffix .c, ft_printf)
+SRCS = $(addsuffix .c, ft_printf, ft_putdec, ft_puthex, ft_putnbr, ft_point_hex)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

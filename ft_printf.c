@@ -53,10 +53,10 @@ int	ft_print_inst(const char *str, ...)
 	else if ((str[i] == 'x') || (str[i] == 'X'))
 		return (ft_puthex(&str[i], va_arg(args, unsigned int)));
 	else if (str[i] == 'p')
-		return (ft_point_hex(va_args(args, void *)));
+		return (ft_point_hex(va_arg(args, void *)));
 	else if (str[i] == '%')
 	{
-		write (1, '%', 1);
+		write (1, "%", 1);
 		return (1);
 	}
 	va_end(args);
@@ -66,6 +66,7 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		i;
+	int		tracker
 
 	i = 0;
 	va_start(args, str);
@@ -73,7 +74,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			ft_print_inst(args);
+			ft_print_inst(&args);
 			i++;
 		}
 		else

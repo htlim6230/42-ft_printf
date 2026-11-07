@@ -25,7 +25,7 @@ int	ft_point_hex(void *n)
 	char	*base;
 
 	len = 0;
-	n = nb;
+	nb = (long)n;
 	base = "0123456789abcdef";
 	while (nb[i] != '\0')
 	{

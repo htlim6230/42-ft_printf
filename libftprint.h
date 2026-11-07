@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINT_H
+#infdef LIBFTPRINT_H
 # define LIBFTPRINT_H
 
 # include <stdlib.h>

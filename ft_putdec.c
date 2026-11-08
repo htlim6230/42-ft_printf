@@ -49,18 +49,15 @@ int	ft_put_fraction(double fractional_part)
 		fractional_part -= digit;
 		i++;
 	}
-	return (ft_strlen(&c) + 6);
+	return (6);
 }
 
 int	ft_putdec(double dec)
 {
 	int		count;
-	int		i;
-	int		digit;
 	double	fractional_part;
 
 	count = 0;
-	i = 0;
 
 	if (dec < 0)
 	{
@@ -72,9 +69,6 @@ int	ft_putdec(double dec)
 	write(1, ".", 1);
 	count++;
 	fractional_part = dec - (int)dec;
-	while (i < 6)
-	{
-		digit = ft_put_fraction(fractional_part);
-	}
-	return (count + digit);
+	count += ft_put_fraction(fractional_part);
+	return (count);
 }

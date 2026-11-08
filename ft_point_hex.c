@@ -27,7 +27,7 @@ int	ft_point_hex(void *n)
 	len = 0;
 	nb = (long)n;
 	base = "0123456789abcdef";
-	while (nb[i] != '\0')
+	while (nb > 0)
 	{
 		if (nb >= 16)
 		{

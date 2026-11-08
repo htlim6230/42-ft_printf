@@ -36,12 +36,12 @@ int	ft_putstr(char *s)
 	return (i);
 }
 
-int	ft_print_inst(const char *str, ...)
+int	ft_print_inst(va_list args, const char *str, ...)
 {
-	va_list	args;
 	int		i;
 
-	va_start(args, str);
+	i = 0;
+	//va_start(args, str);
 	if (str[i] == 'c')
 		return (ft_putchar(va_arg(args, char)));
 	else if (str[i] == 's')
@@ -51,7 +51,7 @@ int	ft_print_inst(const char *str, ...)
 	else if ((str[i] == 'd') || (str[i] == 'u'))
 		return (ft_putdec(va_arg(args, double)));
 	else if ((str[i] == 'x') || (str[i] == 'X'))
-		return (ft_puthex(&str[i], va_arg(args, unsigned int)));
+		return (ft_puthex(str[i], va_arg(args, unsigned int)));
 	else if (str[i] == 'p')
 		return (ft_point_hex(va_arg(args, void *)));
 	else if (str[i] == '%')
@@ -72,17 +72,16 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1] != '\0')
 		{
-			ft_print_inst(&args);
+			ft_print_inst(args, &str[i + 1]);
 			i++;
 		}
 		else
-			tracker += ft_putchar(str[i]);
+			return (ft_putchar(str[i]));
 		i++;
 	}
 	va_end(args);
-	return (i);
 }
 
 int	main()

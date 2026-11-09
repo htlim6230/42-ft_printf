@@ -10,13 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#infdef FT_PRINTF_H
+#ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 
-int	ft_printf(const char *, ...);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+int		ft_printf(const char *str, ...);
+size_t	ft_strlen(const char *str);
+int		ft_put_fraction(double fractional_part);
+int		ft_putdec(double dec);
+int		ft_puthex(char format, unsigned int n);
+int		ft_putnbr(int n);
+int		ft_point_hex(void *n);
 
 #endif

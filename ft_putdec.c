@@ -17,21 +17,6 @@
 
 #include <stdio.h>
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-	if (str[i] == '\0')
-	{
-		return (0);
-	}
-}
 
 int	ft_put_fraction(double fractional_part)
 {
@@ -59,6 +44,11 @@ int	ft_putdec(double dec)
 
 	count = 0;
 
+	if (!dec)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
 	if (dec < 0)
 	{
 		write(1, "-", 1);

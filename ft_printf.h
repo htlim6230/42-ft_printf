@@ -24,6 +24,7 @@ size_t	ft_strlen(const char *str);
 int		ft_put_fraction(double fractional_part);
 int		ft_putdec(double dec);
 int		ft_puthex(char format, unsigned int n);
+int	    ft_printnbr(long nb);
 int		ft_putnbr(int n);
 int		ft_point_hex(void *n);
 

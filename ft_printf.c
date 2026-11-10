@@ -41,9 +41,8 @@ int	ft_print_inst(va_list args, const char *str, ...)
 	int		i;
 
 	i = 0;
-	//va_start(args, str);
 	if (str[i] == 'c')
-		return (ft_putchar(va_arg(args, char)));
+		return (ft_putchar((char)va_arg(args, int)));
 	else if (str[i] == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (str[i] == 'i')
@@ -59,7 +58,6 @@ int	ft_print_inst(va_list args, const char *str, ...)
 		write (1, "%", 1);
 		return (1);
 	}
-	va_end(args);
 }
 
 int	ft_printf(const char *str, ...)
@@ -70,18 +68,21 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	va_start(args, str);
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%' && str[i + 1] != '\0')
 		{
-			ft_print_inst(args, &str[i + 1]);
+			tracker += ft_print_inst(args, &str[i + 1]);
 			i++;
 		}
 		else
-			return (ft_putchar(str[i]));
+			tracker += ft_putchar(str[i]);
 		i++;
 	}
 	va_end(args);
+	return (tracker);
 }
 
 int	main()

@@ -20,12 +20,12 @@
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		ft_printf(const char *str, ...);
-size_t	ft_strlen(const char *str);
-int		ft_put_fraction(double fractional_part);
-int		ft_putdec(double dec);
+int		ft_print_inst(va_list args, const char *str, ...);
 int		ft_puthex(char format, unsigned int n);
 int	    ft_printnbr(long nb);
 int		ft_putnbr(int n);
 int		ft_point_hex(void *n);
+int		ft_putunsigned(unsigned int n);
+int		ft_printunsigned(unsigned long nb);
 
 #endif

@@ -45,10 +45,10 @@ int	ft_print_inst(va_list args, const char *str, ...)
 		return (ft_putchar((char)va_arg(args, int)));
 	else if (str[i] == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	else if (str[i] == 'i')
+	else if ((str[i] == 'd') || str[i] == 'i')
 		return (ft_putnbr(va_arg(args, int)));
-	else if ((str[i] == 'd') || (str[i] == 'u'))
-		return (ft_putdec(va_arg(args, double)));
+	else if (str[i] == 'u')
+		return (ft_putunsigned(va_arg(args, unsigned int)));
 	else if ((str[i] == 'x') || (str[i] == 'X'))
 		return (ft_puthex(str[i], va_arg(args, unsigned int)));
 	else if (str[i] == 'p')

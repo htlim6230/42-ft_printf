@@ -20,25 +20,16 @@
 int	ft_point_hex(void *n)
 {
 	long	nb;
-	int		i;
 	int		len;
-	char	*base;
 
 	len = 0;
-	nb = (long)n;
-	base = "0123456789abcdef";
-	while (nb > 0)
+	if (!n)
 	{
-		if (nb >= 16)
-		{
-			len += ft_puthex('x', nb / 16);
-			len += ft_puthex('x', nb % 16);
-		}
-		else
-		{
-			len += ft_putchar(base[nb]);
-		}
-		i++;
+		write (1, "(nil)", 5);
+		return (5);
 	}
-	return (len);
+	nb = (long)n;
+	write (1, "0x", 2);
+	len += (ft_puthex('x', nb);
+	return (len + 2);
 }

@@ -19,13 +19,16 @@
 
 int	ft_puthex(char format, unsigned int n)
 {
-	// long	nb;
 	int		len;
 	char	*base;
 
-	// nb = n;
 	len = 0;
 
+	if (!n)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
 	if (format == 'x')
 		base = "0123456789abcdef";
 	else if (format == 'X')
@@ -36,8 +39,6 @@ int	ft_puthex(char format, unsigned int n)
 		len += ft_puthex(format, n % 16);
 	}
 	else
-	{
 		len += ft_putchar(base[n]);
-	}
 	return (len);
 }

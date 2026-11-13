@@ -6,37 +6,13 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/28 14:47:20 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/06 20:04:16 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/13 19:38:02 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
 #include "ft_printf.h"
 
-#include <stdio.h>
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-	return (i);
-}
-
-int	ft_print_inst(va_list args, const char *str, ...)
+static int	ft_print_inst(va_list args, const char *str, ...)
 {
 	int		i;
 
@@ -58,18 +34,21 @@ int	ft_print_inst(va_list args, const char *str, ...)
 		write (1, "%", 1);
 		return (1);
 	}
+	else
+		return (0);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		i;
-	int		tracker
+	int		tracker;
 
 	i = 0;
+	tracker = 0;
 	va_start(args, str);
 	if (!str)
-		return (0);
+		return (-1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%' && str[i + 1] != '\0')
@@ -83,11 +62,4 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(args);
 	return (tracker);
-}
-
-int	main()
-{
-	int ret = ft_printf("Test1: %s %f\n", "testing", 12.345);
-	printf("Results: %d\n characters printed", ret);
-	return (0);
 }

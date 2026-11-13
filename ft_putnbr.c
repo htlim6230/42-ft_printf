@@ -6,23 +6,18 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 21:12:39 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/06 17:33:49 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/13 18:54:17 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
 #include "ft_printf.h"
 
-#include <stdio.h>
-
-int	ft_printnbr(long nb)
+static int	ft_printnbr(long nb)
 {
 	int		len;
 
 	len = 0;
-	if (nb>=10)
+	if (nb >= 10)
 	{
 		len += ft_printnbr(nb / 10);
 		len += ft_putchar(nb % 10 + '0');
@@ -57,6 +52,6 @@ int	ft_putnbr(int n)
 		nb = -nb;
 		len++;
 	}
-	len += ft_printnbr(nb); 
+	len += ft_printnbr(nb);
 	return (len);
 }

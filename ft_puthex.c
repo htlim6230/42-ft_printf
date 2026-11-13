@@ -6,16 +6,11 @@
 /*   By: hui-tinl <hui-tinl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 15:40:17 by hui-tinl          #+#    #+#             */
-/*   Updated: 2026/11/06 17:33:47 by hui-tinl         ###   ########.fr       */
+/*   Updated: 2026/11/13 18:39:38 by hui-tinl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 int	ft_puthex(char format, unsigned int n)
 {
